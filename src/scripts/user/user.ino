@@ -33,4 +33,4 @@ void setup() {
 
 void loop() {
   // Hier zou de verdere functionaliteit van de ESP32 komen
-}
+2}
