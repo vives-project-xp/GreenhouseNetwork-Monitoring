@@ -15,12 +15,14 @@ class GreenhouseConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         if user_input is not None:
             ip_address = user_input.get("ip_address")
+            name = user_input.get("name")
             # Voeg validatie toe als dat nodig is
-            return self.async_create_entry(title="Greenhouse", data={"ip_address": ip_address})
+            return self.async_create_entry(title="Greenhouse", data={"ip_address": ip_address , "name" : name})
 
         # Schema voor het invoeren van een IP-adres
         data_schema = vol.Schema({
             vol.Required("ip_address", default="0.0.0.0"): str,
+            vol.Required("name", default="Greenhouse Sensor"): str,
         })
 
         return self.async_show_form(

@@ -9,13 +9,6 @@ from .sensor import GreenhouseSensor
 DOMAIN = "greenhouse"
 _LOGGER = logging.getLogger(__name__)
 
-async def async_setup(hass, config):
-    """Setup de Greenhouse integratie."""
-    _LOGGER.info("Start Greenhouse Integratie...")
-
-    return True
-
-
 async def async_setup_entry(hass, entry):
     """Setup een configuratie-entry voor de integratie."""
     ip_address = entry.data["ip_address"]
@@ -43,7 +36,7 @@ async def async_setup_entry(hass, entry):
     hass.states.async_set("sensor.greenhouse_status", "onbekend")
 
     # Regelmatige updates instellen
-    async_track_time_interval(hass, update_sensor, timedelta(seconds=60))
+    async_track_time_interval(hass, update_sensor, timedelta(seconds=5))
 
     return True
 
@@ -64,6 +57,6 @@ async def async_setup(hass, config):
 
     # Registreer de Zeroconf discovery listener
     zeroconf = await async_get_instance(hass)
-    zeroconf.async_listen("_greenhouse._tcp.local.", async_discover_zeroconf)
+    await zeroconf.async_register_service("_greenhouse._tcp.local.", async_discover_zeroconf)
 
     return True

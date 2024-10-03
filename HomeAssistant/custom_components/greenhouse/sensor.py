@@ -25,7 +25,7 @@ class GreenhouseSensor(Entity):
     @property
     def unique_id(self):
         """Unieke ID voor de sensor."""
-        return "greenhouse_status_sensor"
+        return "greenhouse_status_sensor" + self._host
 
     @property
     def device_info(self):
