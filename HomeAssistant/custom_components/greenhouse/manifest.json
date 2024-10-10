@@ -1,14 +1,10 @@
 {
   "domain": "greenhouse",
-  "name": "Greenhouse Integration",
+  "name": "Greenhouse",
   "version": "1.0",
-  "documentation": "https://github.com/vives-project-xp/GreenhouseNetwork-Monitoring",
+  "documentation": "https://example.com/docs",
   "requirements": [],
-  "codeowners": [],
-  "zeroconf": [
-    "_greenhouse._tcp.local."
-  ],
-  "iot_class": "local_push",
+  "codeowners": ["@yourusername"],
   "config_flow": true,
-  "icon": "custom_components/greenhouse/icon.svg"
+  "iot_class": "local_polling"
 }
