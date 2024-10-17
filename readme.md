@@ -1,4 +1,4 @@
-# Greenhouse Network & monitoring
+# Greenhouse Network & Monitoring
 
 ## Table of contents
 - [The team](#the-team)
@@ -15,11 +15,10 @@
     + [homeassistant dashboard](#homeassistant-dashboard)
     + [Custom dashboard](#custom-dashboard)
     + [Custom Script](#custom-script)
-  * [planning](#planning)
-  * [the Github](#the-github)
-  * [The powerpoint](#the-powerpoint)
-  * [The poster](#the-poster)
-...
+  * [Planning](#planning)
+  * [The Github](#the-github)
+  * [The PowerPoint](#the-powerpoint)
+  * [The Poster](#the-poster)
 
 ## The team
 - Belderbos Nigel
@@ -27,120 +26,101 @@
 - Vannevel Aitor
 - Vanthorre Elias
 
-## Het idea
-The idea of this project is providing the serre, that will be deployed outside in the area of the campus of vives of WiFi and a dashboard for the incoming data of the sensors.
-
+## The idea
+The idea of this project is to provide the serre, which will be deployed outside in the area of the campus of Vives, with WiFi and a dashboard for monitoring the incoming data from the sensors.
 
 ## The project
 
-The project is divided in 2 parts:
+The project is divided into 2 parts:
 - The network
 - The monitoring
 
-
 ## Bom list
 
-| Beschrijving | Hoeveelheid | Prijs | Al aanwezig op school |
-|--------------|-------------|-------|-----------------------|
-| Transmitter LTU Rocket | 1 | [€369](https://eu.store.ui.com/eu/en/collections/uisp-wireless-ltu-5-ghz-basestation/products/ltu-rocket) | Ja |
-| LTU long Range | 6 | [€714](https://eu.store.ui.com/eu/en/collections/uisp-wireless-ltu-5-ghz-client-long-range/products/ltu-lr) | Ja |
-| airMAX 5 GHz, 19/20 dBi Sector | 1 | [€128](https://eu.store.ui.com/eu/en/collections/uisp-wireless-antennas-sector/products/am-5g2?variant=am-5g19-120) | Ja |
-ubiquiti Ap lite | 1 | [€82](https://eu.store.ui.com/eu/en/products/uap-ac-lite)| Ja |
-| Cisco catalyst 2960X-24PS-L | 1 | [€918](https://www.cisco.com/c/en/us/products/collateral/switches/catalyst-2960-x-series-switches/datasheet-c78-729232.html) | Ja |
+| Description | Quantity | Price | Already available at school |
+|-------------|----------|-------|----------------------------|
+| Transmitter LTU Rocket | 1 | [€369](https://eu.store.ui.com/eu/en/collections/uisp-wireless-ltu-5-ghz-basestation/products/ltu-rocket) | Yes |
+| LTU Long Range | 6 | [€714](https://eu.store.ui.com/eu/en/collections/uisp-wireless-ltu-5-ghz-client-long-range/products/ltu-lr) | Yes |
+| airMAX 5 GHz, 19/20 dBi Sector | 1 | [€128](https://eu.store.ui.com/eu/en/collections/uisp-wireless-antennas-sector/products/am-5g2?variant=am-5g19-120) | Yes |
+| Ubiquiti AP Lite | 1 | [€82](https://eu.store.ui.com/eu/en/products/uap-ac-lite) | Yes |
+| Cisco Catalyst 2960X-24PS-L | 1 | [€918](https://www.cisco.com/c/en/us/products/collateral/switches/catalyst-2960-x-series-switches/datasheet-c78-729232.html) | Yes |
 | **Total Price** | - | **€2211** |
 
 ### The network
 
-The network is a simple network that will be deployed in the serre. There will be 1 Ap in the middle of the serre. The network will be a WiFi network that will be used to send the data of the sensors to the monitoring dashboard. The network will have a switch in the serre. The switch will be connected to the Devbit by an ethernet. so Devbit can give een DHCP adress to the sensors.
+The network will be deployed in the serre. It will consist of one access point (AP) in the middle, connecting sensors to a monitoring dashboard via WiFi. A switch will connect the network to the Devbit using Ethernet to assign DHCP addresses to the sensors.
 
 #### Used network gear
 
-##### the AP
+##### The AP
+The AP is a Ubiquiti Unifi AC Lite.
 
-The AP is an Ubiquiti Unifi AC lite 
-
-![alt text](<foto's/ac lite.png>)
-
+![AP](<foto's/ac lite.png>){height=100px}
 
 ##### The Switch
+The switch is a Cisco Catalyst 2960X-24PS-L.
 
-the switch is an Cisco catalyst 2960X-24PS-L
+![Switch](<foto's/cisco catalyst 2960x.png>){height=100px}
 
-![alt text](<foto's/cisco catalyst 2960x.png>)
-
-#### The point to multipoint
-
+#### Point to Multipoint
 1. LTU Rocket
 
-![alt text](<foto's/LTU rocket.png>)
+![LTU Rocket](<foto's/LTU rocket.png>){height=100px}
 
-2. LTU Long range
+2. LTU Long Range
 
-![alt text](<foto's/LTU long range.png>)
+<img src="foto's/LTU long range.png" style="height: 100px;" alt="LTU Long Range">
 
 #### Poe
+The switch has a maximum PoE wattage of 30 watts. There are different classes of PoE power, as shown below.
 
-The swith has a max poe wattage of 30 watt. there are also classes of poe power, see the picture below
-
-![alt text](<foto's/Poe classes.png>)
-
-
-#### 
-
-
+![PoE Classes](<foto's/Poe classes.png>){height=100px}
 
 ### The monitoring
 
-The monitoring is a dashboard that will be used to monitor the incoming data of the sensors. The dashboard will be Home Assitant that will be hosted on the Server in B303. 
+The monitoring system will use a Home Assistant dashboard hosted on the server in room B303 to track incoming sensor data.
 
-#### homeassistant dashboard
+#### HomeAssistant Dashboard
+Details about the HomeAssistant dashboard setup.
 
-#### Custom dashboard
+#### Custom Dashboard
+Information about custom dashboard creation.
 
 #### Custom Script
+Information about custom scripts for monitoring.
 
+## Planning
 
+Sprint 1: (Week 1 to 3)
+- Brainstorming and concept ideas
+- Testing and small prototypes to create a base concept
+- Drafting architecture and a testing checklist
+- Final architecture document with test results justifying component choices
+- Prepare a bill of materials for initial prototypes
 
+Sprint 2: (Week 4 to 6)
+- Create a prototype testing checklist
+- Build one or more prototypes for testing various aspects
+- Adjust architecture documents and log test results
+- Work toward a functioning prototype of the final product
 
+Sprint 3: (Week 7 to 10)
+- Transition from prototype to final product or proof of concept
+- Test functionality and reliability, making adjustments as needed
+- Draft a debugging and testing checklist for the final product
 
-## planning
+Sprint 4: (Week 11 to 12)
+- Thoroughly test the final product using the checklist from Sprint 3
+- Document all test results and apply optimizations
 
-Sprint 1: (Week 1 tot 3)
-- Brainstormen en conceptideeën vormen
-- Testen en kleine prototypes maken om tot een basisconcept te komen
-- Opstellen van een architectuurdocument en checklist voor testen
-- Definitief architectuurdocument met testresultaten die de keuzes van componenten onderbouwen
-- Bestellijst maken met benodigdheden voor de eerste prototypes
+Presentation: (Week 13)
+- Present the project to the entire program, followed by a Q&A session.
 
-Sprint 2: (Week 4 tot 6)
-- Opstellen van een checklist voor het testen van de prototypes
-- Bouwen van één of meerdere prototypes om de verschillende aspecten te testen
-- Aanpassen van het architectuurdocument waar nodig en documenteren van testresultaten
-- Werken naar een eerste werkend prototype van het uiteindelijke product
-
-Sprint 3: (Week 7 tot 10)
-- Overgang van de prototypefase naar het eindresultaat (finaal product of proof of concept)
-- Testen van elk aspect van het product op functionaliteit en betrouwbaarheid en aanpassingen maken indien nodig
-- Opstellen van een checklist voor het debuggen en testen van het eindresultaat
-
-Sprint 4: (Week 11 tot 12)
-- Gedetailleerd testen van het eindresultaat aan de hand van de checklist uit de vorige sprint
-- Documenteren van alle testresultaten en optimalisaties doorvoeren waar nodig
-
-Presentatie: (Week 13)
-- Het presenteren van het gemaakte project aan de volledige opleiding met een vragen moment op het einde.
-
-
-## the Github
-
+## The Github
 [Link to the Github](https://github.com/vives-project-xp/GreenhouseNetwork-Monitoring)
 
+## The PowerPoint
+[Link to the PowerPoint]()
 
-## The powerpoint
-
-[Link to the powerpoint] ()
-
-
-## The poster
-
-[Link to the poster] ()
+## The Poster
+[Link to the Poster]()
