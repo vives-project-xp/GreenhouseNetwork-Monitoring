@@ -16,7 +16,7 @@ void setup()
 
   Serial.println("Setup complete");
   Serial.println("Starting sensor setup");
-  sensor = HaSensor("temperature", "°C");
+  sensor = HaSensor(SensorType::TEMPERATURE);
 
 }
 
