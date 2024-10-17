@@ -1,21 +1,25 @@
+// network setup
 #include <WiFi.h>
 #include <ESPmDNS.h>
-
-#define ssid "devbit"
+#define ssid "devbit
 #define password  "Dr@@dloos!"
-#define device_name  "greenhouse"
-
-// Maak een eenvoudige webpagina beschikbaar
 WiFiServer server(80);
 
+
 void setup() {
+  
+
   Serial.begin(115200);
   WiFi.begin(ssid, password);
 
+  Serial.print("Verbinden met WiFi...");
   do{
     delay(500);
-    Serial.println("Verbinden met WiFi...");
+    Serial.print(".");
   }while(WiFi.status() != WL_CONNECTED);
+  Serial.print("\n");
+
+  String device_name = "greenhouse";
 
 
   // Start mDNS service
@@ -26,11 +30,18 @@ void setup() {
       if (MDNS.begin(device_name)) break;
     }
   }
-  
+
+
+
   Serial.println("mDNS responder gestart");
+  Serial.print("device name: ");
+  Serial.println(device_name);
+  MDNS.addService("_greenhouse", "_tcp", 80);
+
   server.begin();
+  
 }
 
 void loop() {
-  // Hier zou de verdere functionaliteit van de ESP32 komen
-2}
+
+}
