@@ -69,7 +69,7 @@ The switch is a Cisco Catalyst 2960X-24PS-L.
 
 2. LTU Long Range
 
-![LTU Long Range](<foto's/LTU long range.png>){height=100px}
+<img src="foto's/LTU long range.png" style="height: 100px;" alt="LTU Long Range">
 
 #### Poe
 The switch has a maximum PoE wattage of 30 watts. There are different classes of PoE power, as shown below.
