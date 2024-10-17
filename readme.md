@@ -45,7 +45,7 @@ The project is divided in 2 parts:
 | Transmitter LTU Rocket | 1 | [€369](https://eu.store.ui.com/eu/en/collections/uisp-wireless-ltu-5-ghz-basestation/products/ltu-rocket) | Ja |
 | LTU long Range | 6 | [€714](https://eu.store.ui.com/eu/en/collections/uisp-wireless-ltu-5-ghz-client-long-range/products/ltu-lr) | Ja |
 | airMAX 5 GHz, 19/20 dBi Sector | 1 | [€128](https://eu.store.ui.com/eu/en/collections/uisp-wireless-antennas-sector/products/am-5g2?variant=am-5g19-120) | Ja |
-ubiquiti Ap lite | 1 | [€82] | (https://eu.store.ui.com/eu/en/products/uap-ac-lite)| Ja |
+ubiquiti Ap lite | 1 | [€82](https://eu.store.ui.com/eu/en/products/uap-ac-lite)| Ja |
 | Cisco catalyst 2960X-24PS-L | 1 | [€918](https://www.cisco.com/c/en/us/products/collateral/switches/catalyst-2960-x-series-switches/datasheet-c78-729232.html) | Ja |
 | **Total Price** | - | **€2211** |
 
