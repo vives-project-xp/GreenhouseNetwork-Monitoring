@@ -1,0 +1,10 @@
+{
+  "domain": "greenhouse",
+  "name": "Greenhouse",
+  "version": "1.0",
+  "documentation": "https://example.com/docs",
+  "requirements": [],
+  "codeowners": ["@yourusername"],
+  "config_flow": true,
+  "iot_class": "local_polling"
+}
