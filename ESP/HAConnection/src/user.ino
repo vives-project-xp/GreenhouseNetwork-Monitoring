@@ -5,19 +5,22 @@
 HaSensor sensor;
 HaConnection connection;
 
-void setup()
-{
 
+void setup() {
   Serial.begin(115200);
-  connection =  HaConnection("devbit", "Dr@@dloos!", 80, true);
+
+  // Use the credentials from config.h
+  connection = HaConnection(WIFI_SSID, WIFI_PASSWORD, 80, true);
   connection.setup();
+  
   if (!connection.connected)
     return;
 
   Serial.println("Setup complete");
   Serial.println("Starting sensor setup");
+  
+  // Initialize the sensor (e.g., temperature sensor)
   sensor = HaSensor(SensorType::TEMPERATURE);
-
 }
 
 void loop()
