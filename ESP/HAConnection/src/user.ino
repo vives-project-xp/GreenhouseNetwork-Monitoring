@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "connection.h"
 #include "sensor.h"
+#include "config.h"
 
 HaSensor sensor;
 HaConnection connection;
