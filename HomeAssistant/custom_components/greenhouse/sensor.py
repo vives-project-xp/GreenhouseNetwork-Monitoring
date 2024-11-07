@@ -5,18 +5,30 @@ from .const import DOMAIN
 
 async def async_setup_entry(hass, entry, async_add_entities):
     coordinator = hass.data[DOMAIN][entry.entry_id]["coordinator"]
-    async_add_entities([GreenhouseConnectionStatusSensor(coordinator), GreenhouseValueSensor(coordinator), GreenhouseTypeSensor(coordinator), GreenhouseUnitSensor(coordinator)])
+    async_add_entities([GreenhouseSensor(coordinator)])
 
-class GreenhouseConnectionStatusSensor(CoordinatorEntity, SensorEntity):
+class GreenhouseSensor(CoordinatorEntity, SensorEntity):
     """Representation of a Greenhouse connection status sensor."""
 
     def __init__(self, coordinator):
         """Initialize the connection status sensor."""
         super().__init__(coordinator)
         self.coordinator = coordinator
-        self._attr_name = f"{coordinator.device_name} Connection Status"
-        self._attr_unique_id = f"{coordinator.ip_address}_connection_status"
+        self._attr_name = f"{coordinator.device_name}"
+        self._attr_unique_id = f"{coordinator.ip_address}"
         self._attr_device_class = "connectivity"
+        
+    @property
+    def sensor_value(self):
+        return self.coordinator.data.get("sensor_value", 0)
+        
+    @property
+    def sensor_unit(self):
+        return self.coordinator.data.get("sensor_unit", "")
+    
+    @property
+    def sensor_type(self):
+        return self.coordinator.data.get("sensor_type", "default")
 
     @property
     def state(self):
@@ -27,6 +39,15 @@ class GreenhouseConnectionStatusSensor(CoordinatorEntity, SensorEntity):
     def icon(self):
         """Return het icoon gebaseerd op de status."""
         return "mdi:link-variant" if self.state == "connected" else "mdi:link-variant-remove"
+        
+    @property
+    def extra_state_attributes(self):
+        """Add additional attributes to the sensor."""
+        return {
+            "sensor_type": self.sensor_type,
+            "sensor_value": self.sensor_value,
+            "sensor_unit": self.sensor_unit
+        }
 
 
     @property
@@ -36,7 +57,7 @@ class GreenhouseConnectionStatusSensor(CoordinatorEntity, SensorEntity):
             identifiers={(DOMAIN, self.coordinator.ip_address)},
             name=self.coordinator.device_name,
             manufacturer="Greenhouse",
-            model="Diagnose",
+            model="Sensor",
             configuration_url=f"http://{self.coordinator.ip_address}",
         )
 
