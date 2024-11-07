@@ -36,6 +36,7 @@ void HaConnection::AttemptWifiConnection()
         if (output)
             Serial.print(".");
     } while (WiFi.status() != WL_CONNECTED);
+    Serial.print(WiFi.localIP());
     if (output)
         Serial.print("\n");
 };

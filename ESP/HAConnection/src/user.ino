@@ -21,7 +21,7 @@ void setup() {
   Serial.println("Starting sensor setup");
   
   // Initialize the sensor (e.g., temperature sensor)
-  sensor = HaSensor(SensorType::TEMPERATURE);
+  sensor = HaSensor(SensorType::HUMIDITY);
 }
 
 void loop()
