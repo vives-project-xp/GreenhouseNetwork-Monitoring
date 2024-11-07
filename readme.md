@@ -55,17 +55,17 @@ The network will be deployed in the serre. It will consist of one access point (
 ##### The AP
 The AP is a Ubiquiti Unifi AC Lite.
 
-<img src="<foto's/ac lite.png>" alt="AP" style="height: 100;">
+<img src="foto's/ac lite.png" alt="AP" style="height: 100px;">
 
 ##### The Switch
 The switch is a Cisco Catalyst 2960X-24PS-L.
 
-<img src="<foto's/cisco catalyst 2960x.png>" alt="Switch" style="height: 100;">
+<img src="foto's/cisco catalyst 2960x.png" alt="Switch" style="height: 100px;">
 
 #### Point to Multipoint
 1. LTU Rocket
 
-<img src="<foto's/LTU rocket>" alt="LTU Rocket" style="height: 100;">
+<img src="foto's/LTU rocket.png" alt="LTU Rocket" style="height: 100px;">
 
 
 
@@ -73,7 +73,7 @@ The switch is a Cisco Catalyst 2960X-24PS-L.
 2. LTU Long Range
 
 
-<img src="<foto's/LTU long range.png>" alt="LTU Long Range" style="height: 100;">
+<img src="foto's/LTU long range.png" alt="LTU Long Range" style="height: 100px;">
 
 #### Poe
 The switch has a maximum PoE wattage of 30 watts. There are different classes of PoE power, as shown below.
