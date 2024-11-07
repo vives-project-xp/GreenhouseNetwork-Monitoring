@@ -65,16 +65,21 @@ The switch is a Cisco Catalyst 2960X-24PS-L.
 #### Point to Multipoint
 1. LTU Rocket
 
-![LTU Rocket](<foto's/LTU rocket.png>){height=100px}
+<img src="<foto's/LTU rocket>" alt="LTU Rocket" style="height: 100;">
+
+
+
 
 2. LTU Long Range
 
-<img src="<foto's/LTU rocket.png>" alt="LTU Rocket" style="height: 100;">
+
+<img src="<foto's/LTU long range.png>" alt="LTU Long Range" style="height: 100;">
 
 #### Poe
 The switch has a maximum PoE wattage of 30 watts. There are different classes of PoE power, as shown below.
 
-<img src="<foto's/Poe classes.png>" alt="PoE Classes" style="height: 100;">
+<img src="foto's/Poe classes.png" alt="PoE Classes" style="height: 100px;">
+
 
 ### The monitoring
 
