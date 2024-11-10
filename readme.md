@@ -60,7 +60,7 @@ The AP is a Ubiquiti Unifi AC Lite.
 ##### The Switch
 The switch is a Cisco Catalyst 2960X-24PS-L.
 
-<img src="foto's/cisco catalyst 2960x.png" alt="Switch" style="height: 300px;">
+<img src="foto's/cisco catalyst 2960x.png" alt="Switch">
 
 #### Point to Multipoint
 1. LTU Rocket
