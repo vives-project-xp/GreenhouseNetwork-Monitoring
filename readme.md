@@ -60,7 +60,7 @@ The AP is a Ubiquiti Unifi AC Lite.
 ##### The Switch
 The switch is a Cisco Catalyst 2960X-24PS-L.
 
-<img src="foto's/cisco catalyst 2960x.png" alt="Switch" style="height: 150px;">
+<img src="foto's/cisco catalyst 2960x.png" alt="Switch" style="height: 100px; width: 200px;">
 
 #### Point to Multipoint
 1. LTU Rocket
@@ -78,7 +78,7 @@ The switch is a Cisco Catalyst 2960X-24PS-L.
 #### Poe
 The switch has a maximum PoE wattage of 30 watts. There are different classes of PoE power, as shown below.
 
-<img src="foto's/Poe classes.png" alt="PoE Classes" style="height: 150px;">
+<img src="foto's/Poe classes.png" alt="PoE Classes" style="height: 250px;">
 
 
 ### The monitoring
