@@ -67,18 +67,31 @@ The switch is a Cisco Catalyst 2960X-24PS-L.
 
 <img src="foto's/LTU rocket.png" alt="LTU Rocket" style="height: 150px;">
 
-
-
-
 2. LTU Long Range
-
 
 <img src="foto's/LTU long range.png" alt="LTU Long Range" style="height: 150px;">
 
 #### Poe
-The switch has a maximum PoE wattage of 30 watts. There are different classes of PoE power, as shown below.
+The switch has a maximum PoE wattage of 370 watts. There are different classes of PoE power, as shown below.
 
-<img src="foto's/Poe classes.png" alt="PoE Classes" style="height: 250px;">
+<img src="foto's/Poe classes.png" alt="PoE Classes" style="height: 350px;">
+
+the things that will be powerd by PoE are:
+- AP Lite
+- 2 Axis cameras
+
+the total wattage of the AP Lite and the 2 Axis cameras is +- 45 watts.
+
+#### The network diagram
+
+the network diagram will look like this:
+
+<img src="foto's/devbit to AP.png" alt="PoE Classes" style="height: 350px;">
+
+the network will be connected to the Devbit using a cable. The Devbit network will assign DHCP addresses to the sensors.
+it will go to the roof of the B block where its connected to the LTU Rocket. The LTU Rocket will send the signal wirelessly to the LTU Long Range.
+The LTU Long Range will send the signal to the AP Lite. 
+with the AP Lite, the sensors will be able to connect to the network.
 
 
 ### The monitoring
@@ -177,4 +190,4 @@ Presentation: (Week 13)
 [Link to the PowerPoint]()
 
 ## The Poster
-[Link to the Poster]()
+[Link to the Poster](Docs\sjabloon affiche project experience - v2(1).pptx)
