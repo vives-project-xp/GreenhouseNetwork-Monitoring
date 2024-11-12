@@ -21,10 +21,10 @@
   * [The Poster](#the-poster)
 
 ## The team
-- Belderbos Nigel
-- Verhelst Robbe
-- Vannevel Aitor
-- Vanthorre Elias
+- Belderbos Nigel (Software)
+- Verhelst Robbe  (Network)
+- Vannevel Aitor (Software)
+- Vanthorre Elias (Network)
 
 ## The idea
 The idea of this project is to provide the serre, which will be deployed outside in the area of the campus of Vives, with WiFi and a dashboard for monitoring the incoming data from the sensors.
