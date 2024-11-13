@@ -21,9 +21,9 @@
   * [The Poster](#the-poster)
 
 ## The team
+- Vannevel Aitor (Scrum Master) (Software)
 - Belderbos Nigel (Software)
 - Verhelst Robbe  (Network)
-- Vannevel Aitor (Software)
 - Vanthorre Elias (Network)
 
 ## The idea
