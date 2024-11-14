@@ -3,7 +3,8 @@
 #include "sensor.h"
 #include "config.h"
 
-HaSensor sensor;
+HaSensor humSensor;
+HaSensor tempSensor;
 HaConnection connection;
 
 
@@ -21,15 +22,17 @@ void setup() {
   Serial.println("Starting sensor setup");
   
   // Initialize the sensor (e.g., temperature sensor)
-  sensor = HaSensor(SensorType::HUMIDITY);
+  humSensor = HaSensor("Vochtigheid" , SensorType::HUMIDITY);
+  tempSensor = HaSensor("Temperatuur" , SensorType::TEMPERATURE);
 }
 
 void loop()
 {
-  // put your main code here, to run repeatedly:
   float randomNumber = random(0, 450);
-
-  sensor.setValue(randomNumber/10);
-  connection.sendData(sensor);
+  humSensor.setValue(randomNumber/10);
+  randomNumber = random(0, 450);
+  tempSensor.setValue(randomNumber/10);
+  std::vector<HaSensor> sensors = {humSensor, tempSensor};
+  connection.sendData("Testing", sensors);
   delay(5000);
 }

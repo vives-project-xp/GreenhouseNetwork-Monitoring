@@ -1,0 +1,7 @@
+{
+  "card-name": "Testing",
+  "sensors": [
+    { "name": "", "type": "Humidity", "unit": "%", "sensor_value": 32.3 },
+    { "name": "", "type": "Temperature", "unit": "°C", "sensor_value": 40.4 }
+  ]
+}
