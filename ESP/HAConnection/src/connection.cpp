@@ -57,7 +57,7 @@ void HaConnection::sendData(HaSensor sensor){
 void HaConnection::sendHttpPost(HaSensor sensor) {
     if (WiFi.status() == WL_CONNECTED) {  // Controleer of WiFi verbinding actief is
         HTTPClient http;
-        String url = "http://10.20.202.1:8123/api/webhook/greenhouse" + stringIP();
+        String url = "http://10.10.2.20:8123/api/webhook/greenhouse" + stringIP();
         Serial.println(url);
         http.begin(url);
         http.addHeader("Content-Type", "application/json");  // Zet de juiste headers
