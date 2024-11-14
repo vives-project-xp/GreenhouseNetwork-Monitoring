@@ -190,4 +190,4 @@ Presentation: (Week 13)
 [Link to the PowerPoint]()
 
 ## The Poster
-[Link to the Poster](Docs\sjabloon affiche project experience - v2(1).pptx)
+[Link to the Poster]()
