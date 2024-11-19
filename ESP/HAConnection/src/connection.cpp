@@ -1,4 +1,6 @@
 #include "connection.h"
+#include <vector>
+#include <ArduinoJson.h>
 
 HaConnection::HaConnection(): HaConnection("undefined", "undefined", 80, false) {};
 HaConnection::HaConnection(String ssid, String password): HaConnection(ssid, password, 80, false) {};
@@ -36,6 +38,7 @@ void HaConnection::AttemptWifiConnection()
         if (output)
             Serial.print(".");
     } while (WiFi.status() != WL_CONNECTED);
+    Serial.print(WiFi.localIP());
     if (output)
         Serial.print("\n");
 };
@@ -47,36 +50,47 @@ void HaConnection::setup()
     this->connected = true;
 };
 
-void HaConnection::sendData(HaSensor sensor){
-    Serial.print("Sending data: ");
-    Serial.println(sensor.getValue());
-    sendHttpPost(sensor);
-};
+void HaConnection::sendData(String card_name, const std::vector<HaSensor>& sensors) {
+    String json = "{";
 
-void HaConnection::sendHttpPost(HaSensor sensor) {
-    if (WiFi.status() == WL_CONNECTED) {  // Controleer of WiFi verbinding actief is
+    String name = card_name.length() > 0 ? card_name : "Sensor";
+    json += "\"card-name\":\"" + name + "\"," + "\"sensors\":[";
+    for (HaSensor sensor : sensors) {
+    
+        json += sensor.toJson() + ",";
+    }
+    json = json.substring(0, json.length() - 1);
+    json += "]}";
+    Serial.println("Sending data: ");
+    Serial.println(json);
+    Serial.println();
+
+    sendHttpPost(json);
+}
+
+void HaConnection::sendHttpPost(String json) {
+    if (WiFi.status() == WL_CONNECTED) {
         HTTPClient http;
-        String url = "http://greenhousenetworking.local:8123/api/webhook/greenhouse" + stringIP();
+        String url = "http://10.10.2.20:8123/api/webhook/greenhouse" + stringIP();
         Serial.println(url);
         http.begin(url);
-        http.addHeader("Content-Type", "application/json");  // Zet de juiste headers
+        http.addHeader("Content-Type", "application/json");
 
-        String sensorJson = sensor.toJson();
-
-        int httpResponseCode = http.POST(sensorJson);
+        int httpResponseCode = http.POST(json);
 
         if (httpResponseCode > 0) {
             String response = http.getString();
+            Serial.println("Response: " + response);
         } else {
             Serial.println("Error in sending POST: " + String(httpResponseCode));
         }
 
-        // Sluit de HTTP verbinding
         http.end();
     } else {
         Serial.println("WiFi not connected");
     }
 }
+
 
 
 String HaConnection::stringIP() {

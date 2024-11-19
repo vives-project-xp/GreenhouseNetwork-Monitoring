@@ -11,6 +11,7 @@ enum class SensorType {
 class HaSensor {
 
 private:
+    String name;
     SensorType type;
     String unit;
     float value;
@@ -18,9 +19,10 @@ private:
 
 public:
     HaSensor();
-    HaSensor(SensorType type);
+    HaSensor(String name, SensorType type);
     void setValue(float value);
     float getValue();
+    String getName();
     SensorType getType();
     String getUnit();
     String toJson();

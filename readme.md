@@ -21,10 +21,10 @@
   * [The Poster](#the-poster)
 
 ## The team
-- Belderbos Nigel
-- Verhelst Robbe
-- Vannevel Aitor
-- Vanthorre Elias
+- Vannevel Aitor (Scrum Master) (Software)
+- Belderbos Nigel (Software)
+- Verhelst Robbe  (Network)
+- Vanthorre Elias (Network)
 
 ## The idea
 The idea of this project is to provide the serre, which will be deployed outside in the area of the campus of Vives, with WiFi and a dashboard for monitoring the incoming data from the sensors.
@@ -55,26 +55,44 @@ The network will be deployed in the serre. It will consist of one access point (
 ##### The AP
 The AP is a Ubiquiti Unifi AC Lite.
 
-![AP](<foto's/ac lite.png>){height=100px}
+<img src="foto's/ac lite.png" alt="AP" style="height: 150px;">
 
 ##### The Switch
 The switch is a Cisco Catalyst 2960X-24PS-L.
 
-![Switch](<foto's/cisco catalyst 2960x.png>){height=100px}
+<img src="foto's/cisco catalyst 2960x.png" alt="Switch">
 
 #### Point to Multipoint
 1. LTU Rocket
 
-![LTU Rocket](<foto's/LTU rocket.png>){height=100px}
+<img src="foto's/LTU rocket.png" alt="LTU Rocket" style="height: 150px;">
 
 2. LTU Long Range
 
-![LTU Long Range](<foto's/LTU long range.png>){height=100px}
+<img src="foto's/LTU long range.png" alt="LTU Long Range" style="height: 150px;">
 
 #### Poe
-The switch has a maximum PoE wattage of 30 watts. There are different classes of PoE power, as shown below.
+The switch has a maximum PoE wattage of 370 watts. There are different classes of PoE power, as shown below.
 
-![PoE Classes](<foto's/Poe classes.png>){height=100px}
+<img src="foto's/Poe classes.png" alt="PoE Classes" style="height: 350px;">
+
+the things that will be powerd by PoE are:
+- AP Lite
+- 2 Axis cameras
+
+the total wattage of the AP Lite and the 2 Axis cameras is +- 45 watts.
+
+#### The network diagram
+
+the network diagram will look like this:
+
+<img src="foto's/devbit to AP.PNG" alt="Network diagram">
+
+the network will be connected to the Devbit using a cable. The Devbit network will assign DHCP addresses to the sensors.
+it will go to the roof of the B block where its connected to the LTU Rocket. The LTU Rocket will send the signal wirelessly to the LTU Long Range.
+The LTU Long Range will send the signal to the AP Lite. 
+with the AP Lite, the sensors will be able to connect to the network.
+
 
 ### The monitoring
 

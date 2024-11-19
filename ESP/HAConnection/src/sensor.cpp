@@ -1,7 +1,8 @@
 #include "sensor.h"
 
-HaSensor::HaSensor(): type(), value(0){};
-HaSensor::HaSensor(SensorType type) : type(type) {
+HaSensor::HaSensor(): name(), type(), value(0){};
+HaSensor::HaSensor(String name, SensorType type) : name(), type(type) {
+    this->name = name;
     switch (type) {
         case SensorType::TEMPERATURE:
             this->unit = "°C";
@@ -12,6 +13,8 @@ HaSensor::HaSensor(SensorType type) : type(type) {
     }
     Serial.println("Sensor initialized");
     Serial.println("-----------------------");
+    Serial.print("Name: ");
+    Serial.println(name);
     Serial.print("Type: ");
     Serial.print(typeToString(type));
     Serial.print("\nUnit: ");
@@ -22,6 +25,7 @@ HaSensor::HaSensor(SensorType type) : type(type) {
 
 String HaSensor::toJson() {
     String json = "{";
+    json += "\"name\":\"" + this->name + "\",";
     json += "\"type\":\"" + typeToString(this->type) + "\",";
     json += "\"unit\":\"" + this->unit + "\",";
     json += "\"sensor_value\":" + String(this->value);

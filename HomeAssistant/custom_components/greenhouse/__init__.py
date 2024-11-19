@@ -36,22 +36,31 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         try:
             data = await request.json()
             _LOGGER.info(f"Received webhook data: {data} from {webhook_id}")
+            sensor_value = 0
+            sensor_type = None
+            sensor_unit = ""
 
             if "sensor_value" in data:
                 sensor_value = data["sensor_value"]
                 _LOGGER.info(f"Sensor value received: {sensor_value}")
+            if "type" in data:
+                sensor_type = data["type"]
+            if "unit" in data:
+                sensor_unit = data["unit"]
 
-                # Find the correct coordinator using the webhook_id
-                for entry_data in hass.data[DOMAIN].values():
-                    if entry_data["webhook_id"] == webhook_id:
-                        coordinator = entry_data["coordinator"]
-                        break
-                else:
-                    _LOGGER.error(f"No coordinator found for webhook_id: {webhook_id}")
-                    return web.Response(status=404)
+            # Find the correct coordinator using the webhook_id
+            for entry_data in hass.data[DOMAIN].values():
+                if entry_data["webhook_id"] == webhook_id:
+                    coordinator = entry_data["coordinator"]
+                    break
+            else:
+                _LOGGER.error(f"No coordinator found for webhook_id: {webhook_id}")
+                return web.Response(status=404)
 
-                coordinator.data["sensor_value"] = sensor_value  # Update sensor_value in data
-                await coordinator.async_request_refresh()  # Force entity update
+            coordinator.data["sensor_value"] = sensor_value  # Update sensor_value in data
+            coordinator.data["sensor_type"] = sensor_type
+            coordinator.data["sensor_unit"] = sensor_unit
+            await coordinator.async_request_refresh()  # Force entity update
             return web.Response(text="Data is sended succesfully", status=200)
 
         except Exception as err:
@@ -106,7 +115,9 @@ class GreenhouseCoordinator(DataUpdateCoordinator):
         # Zorg ervoor dat data correct wordt geïnitialiseerd
         self.data = {
             "connected": False,  # Begin met de connectiviteitstatus
-            "sensor_value": 0  # Begin met een lege sensorwaarde
+            "sensor_value": 0,  # Begin met een lege sensorwaarde
+            "sensor_type": None,
+            "sensor_unit": ""
         }
 
     async def _async_update_data(self):
@@ -117,5 +128,3 @@ class GreenhouseCoordinator(DataUpdateCoordinator):
             return self.data  # Zorg ervoor dat je de data retourneert
         except Exception as err:
             raise UpdateFailed(f"Failed to ping device: {self.data}")
-
-
