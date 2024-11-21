@@ -6,7 +6,16 @@
 enum class SensorType {
     TEMPERATURE,
     HUMIDITY,
+    LIGHT,
+    CO2,
+    SOIL_MOISTURE,
+    PH,
+    EC,
+    PRESSURE,
+    AIRFLOW,
+    UV
 };
+
 
 class HaSensor {
 
