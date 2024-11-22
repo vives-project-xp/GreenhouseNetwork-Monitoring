@@ -1,18 +1,15 @@
 import {ContentCardExample} from "./content-card-example.js"
 
 class DynamicContentCard extends HTMLElement {
-  private _config: any;
-  private _sensors: any;
-  private content: any;
 
-  setConfig(config: { base_entity: any; }) { // Set the configuration for the card
+  setConfig(config) { // Set the configuration for the card
     if (!config.base_entity) throw new Error('base_entity is required in the config');
     this._config = config;
     this.innerHTML = '';
     this._sensors = [];
   }
 
-  set hass(hass: { states: {}; }) {
+  set hass(hass) {
     const baseEntity = this._config.base_entity; // Get the base_entity from the config
     const sensors = Object.keys(hass.states).filter((key) => key.startsWith(baseEntity)); // Filter out the sensors based on the base_entity
     if(!this.content){ // this acts as a flag to only run this block once
@@ -46,7 +43,7 @@ class DynamicContentCard extends HTMLElement {
         
     })
     
-    this._sensors.forEach((sensor: { hass: { states: {}; }; }) => { sensor.hass = hass });
+    this._sensors.forEach((sensor) => { sensor.hass = hass });
   }
 
   getCardSize() {

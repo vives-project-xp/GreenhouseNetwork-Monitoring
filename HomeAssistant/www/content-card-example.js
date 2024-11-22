@@ -6,14 +6,6 @@ import {
 } from "./custom-gauges.js";
 
 class ContentCardExample extends HTMLElement {
-  public theme: any;
-  public lastValues: {};
-  public card_name: string;
-  public sensors: any[];
-  public defaultGauge: Gauge;
-  public content: any;
-  public config: any;
-
   constructor() {
     super();
     this.theme = null;
@@ -98,9 +90,7 @@ class ContentCardExample extends HTMLElement {
   }
 
   drawGauge(name, value, id, min = 0, max = 100, unit = "") {
-    const canvas = this.querySelector(
-      `#${name}-sensor-${id}`
-    ) as HTMLCanvasElement;
+    const canvas = this.querySelector(`#${name}-sensor-${id}`);
     if (!canvas) {
       console.error(`Canvas with id #${name}-sensor-${id} not found`);
       return;
@@ -190,7 +180,7 @@ class ContentCardExample extends HTMLElement {
 
 class Gauge {
   canvas(ele, ind) {
-    const c = document.createElement("canvas") as HTMLCanvasElement;
+    const c = document.createElement("canvas");
     c.id = `${ele["name"]}-sensor-${ind}`;
     c.width = 200;
     c.height = 150;

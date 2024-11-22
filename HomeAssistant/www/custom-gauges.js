@@ -15,17 +15,6 @@ class GaugeColors extends Array {
 }
 
 class BaseGauge extends HTMLElement { // Base class for all gauges
-    public _value: number;
-    public _theme: boolean;
-    public _lineWidth: number;
-    public intervalId: any;
-    public lastValue: number;
-    public ctx: any;
-    public width: number;
-    public height: number;
-    public min: number;
-    public max: number;
-
     constructor() {
         super();
         this._theme = true;
@@ -144,8 +133,6 @@ class Humidity extends BaseGauge {
 }
 
 class MultiColoredGauge extends BaseGauge {
-    public colorWeights: GaugeColors;
-
     constructor(colorWeights, min, max) {
         super();
         this.colorWeights = colorWeights;
