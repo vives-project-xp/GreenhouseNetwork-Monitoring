@@ -4,7 +4,8 @@
 #include "config.h"
 
 HaConnection connection;
-HaSensor sensor;
+HaSensor tempSensor;
+HaSensor humSensor;
 
 
 void setup() {
@@ -16,9 +17,13 @@ void setup() {
   if (!connection.connected)
     return;
 
-  sensor = HaSensor("Temperature", SensorType::TEMPERATURE);
-  sensor.setValue(20.5);
-  connection.sendData("Temperature Card", {sensor});
+  tempSensor = HaSensor("Temperature", SensorType::TEMPERATURE);
+  tempSensor.setValue(20.5);
+
+  humSensor = HaSensor("Humidity", SensorType::HUMIDITY);
+  humSensor.setValue(50.5);
+
+  connection.sendData("Temperature Card", {tempSensor, humSensor});
 }
 
 void loop(){}

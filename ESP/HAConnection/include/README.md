@@ -4,6 +4,8 @@
 2. [Verbinding maken met Home Assistant](#verbinding-maken-met-home-assistant)
 3. [Sensor toevoegen](#sensor-toevoegen)
 4. [Data verzenden](#data-verzenden)
+5. [Meerdere sensoren](#meerdere-sensoren)
+6. [Voorbeeld](#voorbeeld)
 
 ## Dependecies
 
@@ -140,6 +142,39 @@ Daarna kan je de data doorsturen.
 
 ```c++
   connection.sendData("Temperature Card", {sensor});
+```
+
+## Meerdere sensoren
+
+```c++
+#include <Arduino.h>
+#include "connection.h"
+#include "sensor.h"
+
+HaConnection connection;
+HaSensor tempSensor;
+HaSensor humSensor;
+
+
+void setup() {
+ Serial.begin(115200);
+
+ connection = HaConnection(WIFI_SSID, WIFI_PASSWORD);
+
+
+ if (!connection.connected)
+   return;
+
+ tempSensor = HaSensor("Temperature", SensorType::TEMPERATURE);
+ tempSensor.setValue(20.5);
+
+ humSensor = HaSensor("Humidity", SensorType::HUMIDITY);
+ humSensor.setValue(50.5);
+
+ connection.sendData("Temperature Card", {tempSensor, humSensor});
+}
+
+void loop(){}
 ```
 
 ## Voorbeeld
