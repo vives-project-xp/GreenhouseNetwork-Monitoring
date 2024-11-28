@@ -3,36 +3,22 @@
 #include "sensor.h"
 #include "config.h"
 
-HaSensor humSensor;
-HaSensor tempSensor;
 HaConnection connection;
+HaSensor sensor;
 
 
 void setup() {
   Serial.begin(115200);
 
-  // Use the credentials from config.h
-  connection = HaConnection(WIFI_SSID, WIFI_PASSWORD, 80, true);
-  connection.setup();
+  connection = HaConnection(WIFI_SSID, WIFI_PASSWORD, "10.10.2.20", 8123, 80, true);
+
   
   if (!connection.connected)
     return;
 
-  Serial.println("Setup complete");
-  Serial.println("Starting sensor setup");
-  
-  // Initialize the sensor (e.g., temperature sensor)
-  humSensor = HaSensor("Vochtigheid" , SensorType::HUMIDITY);
-  tempSensor = HaSensor("Temperatuur" , SensorType::TEMPERATURE);
+  sensor = HaSensor("Temperature", SensorType::TEMPERATURE);
+  sensor.setValue(20.5);
+  connection.sendData("Temperature Card", {sensor});
 }
 
-void loop()
-{
-  float randomNumber = random(0, 450);
-  humSensor.setValue(randomNumber/10);
-  randomNumber = random(0, 450);
-  tempSensor.setValue(randomNumber/10);
-  std::vector<HaSensor> sensors = {humSensor, tempSensor};
-  connection.sendData("Testing", sensors);
-  delay(5000);
-}
+void loop(){}

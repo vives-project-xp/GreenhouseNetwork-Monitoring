@@ -24,18 +24,14 @@ private:
     SensorType type;
     String unit;
     float value;
+    String typeToString(SensorType type);
 
 
 public:
     HaSensor();
     HaSensor(String name, SensorType type);
     void setValue(float value);
-    float getValue();
-    String getName();
-    SensorType getType();
-    String getUnit();
-    String toJson();
-    String typeToString(SensorType type);
+        String toJson();
 };
 
 
