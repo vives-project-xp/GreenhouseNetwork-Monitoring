@@ -88,6 +88,7 @@ void HaConnection::sendHttpPost(String json) {
         http.end();
     } else {
         Serial.println("WiFi not connected");
+        AttemptWifiConnection();
     }
 }
 
