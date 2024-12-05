@@ -15,7 +15,8 @@ HaSensor::HaSensor(String name, SensorType type, int min, int max) : name(name),
         {SensorType::PRESSURE, "hPa"},
         {SensorType::AIRFLOW, "m/s"},
         {SensorType::UV, "index"},
-        {SensorType::WATERLEVEL, "cm"}
+        {SensorType::WATERLEVEL, "cm"},
+        {SensorType::BATTERYLEVEL, "%"}
     };
     this->min = min;
     this->max = max;
@@ -57,7 +58,8 @@ String HaSensor::typeToString(SensorType type) {
         {SensorType::PRESSURE, "Pressure"},
         {SensorType::AIRFLOW, "Airflow"},
         {SensorType::UV, "UV"},
-        {SensorType::WATERLEVEL, "Water Level"}
+        {SensorType::WATERLEVEL, "Water Level"},
+        {SensorType::BATTERYLEVEL, "Battery Level"}
     };
     auto it = typeMap.find(type);
     if (it != typeMap.end()) {
@@ -69,4 +71,8 @@ String HaSensor::typeToString(SensorType type) {
 
 int HaSensor::getValue() {
     return this->value;
+}
+
+int HaSensor::getMax() {
+    return this->max;
 }
