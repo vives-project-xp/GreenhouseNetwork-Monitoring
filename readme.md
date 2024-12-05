@@ -98,6 +98,10 @@ with the AP Lite, the sensors will be able to connect to the network.
 
 The monitoring system will use a Home Assistant dashboard hosted on the server in room B303 to track incoming sensor data.
 
+ESP32-test1 haos = 10.10.2.6
+ESP32-test2 haos = 10.10.2.7
+ESP32-sensoring haos = 10.10.2.
+
 #### HomeAssistant Dashboard
 Details about the HomeAssistant dashboard setup.
 
