@@ -95,7 +95,7 @@ the total wattage of the AP Lite and the 2 Axis cameras is +- 45 watts.
 
 the network diagram will look like this:
 
-<img src="foto's/devbit to AP.PNG" alt="Network diagram">
+<img src="foto's/Connectieviteits document.png" alt="Network diagram">
 
 the network will be connected to the Devbit using a cable. The Devbit network will assign DHCP addresses to the sensors.
 it will go to the roof of the B block where its connected to the LTU Rocket. The LTU Rocket will send the signal wirelessly to the LTU Long Range.
