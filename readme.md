@@ -5,6 +5,8 @@
 - [The team](#the-team)
 - [The idea](#the-idea)
 - [The project](#the-project)
+- [Bom list](#bom-list)
+- [Bom list future improvments](#bom-list-fututre-inprovements)
   - [The network](#the-network)
     - [Used network gear](#used-network-gear)
       - [the AP](#the-ap)
@@ -48,7 +50,18 @@ The project is divided into 2 parts:
 | airMAX 5 GHz, 19/20 dBi Sector | 1        | [€128](https://eu.store.ui.com/eu/en/collections/uisp-wireless-antennas-sector/products/am-5g2?variant=am-5g19-120)          | Yes                         |
 | Ubiquiti AP Lite               | 1        | [€82](https://eu.store.ui.com/eu/en/products/uap-ac-lite)                                                                    | Yes                         |
 | Cisco Catalyst 2960X-24PS-L    | 1        | [€918](https://www.cisco.com/c/en/us/products/collateral/switches/catalyst-2960-x-series-switches/datasheet-c78-729232.html) | Yes                         |
-| **Total Price**                | -        | **€2211**                                                                                                                    |
+| **Total Price**                | -        | **€2211**                   
+
+
+## Bom list Fututre Inprovements              
+
+| Description                    | Quantity | Price                                                                                                                        | Already available at school |
+| ------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| USW-Flex-Utility               | 1        | [€45](https://eu.store.ui.com/eu/en/category/all-switching/products/usw-flexutility)         | No                 |
+| USW-Flex (46W)    | 1        | [€90](https://eu.store.ui.com/eu/en/category/all-switching/products/usw-flex) | No                         |
+| **Total Price**                | -        | **€135**
+
+                                                                                   |
 
 ### The network
 
