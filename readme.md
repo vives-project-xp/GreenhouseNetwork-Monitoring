@@ -181,8 +181,8 @@ Presentation: (Week 13)
 
 ## The PowerPoint
 
-[Link to the PowerPoint]()
+[Link to the PowerPoint](https://vivesonline-my.sharepoint.com/:f:/g/personal/r0937303_student_vives_be/Ep-ShNCv9tVOochhDel2ko0BALOkIxh6qbACojiBD2wuSQ?e=9BV13j)
 
 ## The Poster
 
-[Link to the Poster]()
+[Link to the Poster](https://vivesonline-my.sharepoint.com/:f:/g/personal/r0937303_student_vives_be/EmnuRgFLr0pJslVfbbQ33_IB1D3vgDd2C1KpHBS1sny-PQ?e=IWKPFw)
