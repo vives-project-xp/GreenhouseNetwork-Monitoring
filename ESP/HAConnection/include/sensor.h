@@ -14,7 +14,8 @@ enum class SensorType {
     PRESSURE,
     AIRFLOW,
     UV,
-    WATERLEVEL
+    WATERLEVEL,
+    BATTERYLEVEL
 };
 
 
@@ -36,6 +37,7 @@ public:
     void setValue(float value);
         String toJson();
         int getValue();
+        int getMax();
 };
 
 

@@ -68,7 +68,7 @@ void loop() {
 
 tempSensor.setValue(tempSensor.getValue() + random(-15, 16) * 0.5); // Grotere variatie, max ±7.5
 humSensor.setValue(humSensor.getValue() + random(-20, 21) * 0.5); // Max ±10.0
-lightSensor.setValue(lightSensor.getValue() + random(-500, 501) * 1.0); // Max ±500
+lightSensor.setValue(lightSensor.getValue() + random(-100, 101) * 5.0); // Max ±500
 co2Sensor.setValue(co2Sensor.getValue() + random(-300, 301) * 1.0); // Max ±300
 soilMoistureSensor.setValue(soilMoistureSensor.getValue() + random(-15, 16) * 0.5); // Max ±7.5
 phSensor.setValue(phSensor.getValue() + random(-10, 11) * 0.2); // Max ±2.0
@@ -86,7 +86,7 @@ uvSensor.setValue(uvSensor.getValue() + random(-5, 6) * 0.2); // Max ±1.0
     };
 
     for (auto& sensor : sensors) {
-      if (sensor.getValue() == 0) {
+      if (sensor.getValue() <= 0 || sensor.getValue() >= sensor.getMax()) {
         sensor.setValue(random(1, 101)); // Set a random value between 1 and 100
       }
     }
