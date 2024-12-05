@@ -2,9 +2,10 @@
 #include <vector>
 #include <ArduinoJson.h>
 
-HaConnection::HaConnection(): HaConnection("undefined", "undefined", 80, false) {};
-HaConnection::HaConnection(String ssid, String password): HaConnection(ssid, password, 80, false) {};
-HaConnection::HaConnection(String ssid, String password, int port, bool output): ssid(ssid), password(password), server(WiFiServer(port)), port(port), output(output){};
+HaConnection::HaConnection() {};
+HaConnection::HaConnection(String ssid, String password): HaConnection(ssid, password, "homeassistant.local", 8123, 80, false) {};
+HaConnection::HaConnection(String ssid, String password, String HAIp, int HAPort): HaConnection(ssid, password, HAIp, HAPort, 80, false) {};
+HaConnection::HaConnection(String ssid, String password, String HAIp, int HAPort, int port, bool output): ssid(ssid), password(password), server(WiFiServer(port)), HAIp(HAIp), HAPort(HAPort), port(port), output(output){this->setup();};
 
 void HaConnection::StartMDNS()
 {
@@ -17,7 +18,7 @@ void HaConnection::StartMDNS()
     while (!MDNS.begin(device_name.c_str())) ;
     if (output)
     {
-        Serial.print("MDNS gestart op ");
+        Serial.print("\nMDNS gestart op ");
         Serial.print(device_name);
         Serial.print(".local\n");
     }
@@ -30,11 +31,10 @@ void HaConnection::AttemptWifiConnection()
     if (output) Serial.print("Verbinden met WiFi... ");
     do
     {
-        if (output) Serial.print(".");
+        if (output) Serial.println(".");
         delay(250);
     } while (WiFi.status() != WL_CONNECTED);
-    Serial.print(WiFi.localIP());
-    if (output) Serial.print("\n");
+    Serial.println(WiFi.localIP());
 };
 
 void HaConnection::setup()
@@ -42,6 +42,7 @@ void HaConnection::setup()
     this->AttemptWifiConnection();
     this->StartMDNS();
     this->connected = true;
+    this->checkVersion();
 };
 
 void HaConnection::sendData(String card_name, const std::vector<HaSensor>& sensors) {
@@ -67,19 +68,21 @@ void HaConnection::sendData(String card_name, const std::vector<HaSensor>& senso
 void HaConnection::sendHttpPost(String json) {
     if (WiFi.status() == WL_CONNECTED) {
         HTTPClient http;
-        String url = "http://10.10.2.20:8123/api/webhook/greenhouse" + stringIP();
+        String url = "http://" + HAIp + ":" + HAPort + "/api/webhook/greenhouse" + stringIP();
         if(output) Serial.println(url);
         http.begin(url);
         http.addHeader("Content-Type", "application/json");
         int httpResponseCode = http.POST(json);
-        if (httpResponseCode > 0) {
-            String response = http.getString();
-            Serial.println("Response: " + response);
-        } else Serial.println("Error in sending POST: " + String(httpResponseCode));
+        if(output){
+            if (httpResponseCode > 0) {
+                String response = http.getString();
+                Serial.println("Response: " + response);
+            } else Serial.println("Error in sending POST: " + String(httpResponseCode));
+        }
         
         http.end();
     } else {
-        Serial.println("WiFi not connected");
+        if(output) Serial.println("WiFi not connected");
         AttemptWifiConnection();
     }
 }
@@ -93,4 +96,22 @@ String HaConnection::stringIP() {
     ip.replace('.', '_');
 
     return "_" + ip;  // Voeg aan het begin een underscore toe
+}
+
+void HaConnection::checkVersion() {
+    if (WiFi.status() == WL_CONNECTED) {
+        HTTPClient http;
+        String url = "https://api.github.com/repos/vives-project-xp/GreenhouseNetwork-Monitoring/releases/latest";
+        http.begin(url);
+        int httpResponseCode = http.GET();
+        if (httpResponseCode > 0) {
+            String response = http.getString();
+            JsonDocument doc;
+            deserializeJson(doc, response);
+            String latestVersion = doc["tag_name"];
+            if (latestVersion != version) {
+                Serial.println("New version available: " + latestVersion + " -> https://github.com/vives-project-xp/GreenhouseNetwork-Monitoring/releases");
+            }
+        }
+    }
 }
