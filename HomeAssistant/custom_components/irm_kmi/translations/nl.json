@@ -1,0 +1,200 @@
+{
+  "title": "Koninklijk Meteorologisch Instituut van België",
+  "config": {
+    "abort": {
+      "already_configured": "De weersvoorspellingen voor deze zone zijn al geconfigureerd",
+      "unknown": "Onbekende fout"
+    },
+    "step": {
+      "user": {
+        "title": "Instellingen",
+        "data": {
+          "zone": "Zone",
+          "style": "Radarstijl",
+          "dark_mode": "Radar in donkere modus",
+          "use_deprecated_forecast_attribute": "Gebruik het forecat attribuut (afgeschaft)",
+          "language_override": "Taal"
+        }
+      }
+    },
+    "error": {
+      "out_of_benelux": "{zone} ligt buiten de Benelux. Kies een zone in de Benelux.",
+      "api_error": "Kon geen gegevens van de API krijgen",
+      "zone_not_exist": "{zone} bestaat niet"
+    }
+  },
+  "selector": {
+    "style": {
+      "options": {
+        "standard_style": "Standaard",
+        "contrast_style": "Hoog contrast",
+        "yellow_red_style": "Geel-Rood",
+        "satellite_style": "Satellietkaart"
+      }
+    },
+    "use_deprecated_forecast_attribute": {
+      "options": {
+        "do_not_use_deprecated_forecast": "Niet gebruiken (aanbevolen)",
+        "daily_in_deprecated_forecast": "Gebruik voor dagelijkse voorspellingen",
+        "twice_daily_in_deprecated_forecast": "Gebruik voor tweemaal daags voorspellingen",
+        "hourly_in_deprecated_forecast": "Gebruik voor uurlijkse voorspellingen"
+      }
+    },
+    "repair_solution": {
+      "options": {
+        "repair_option_move": "Ik heb de zone verplaats naar de Benelux",
+        "repair_option_delete": "Deze configuratie verwijderen"
+      }
+    },
+    "language_override": {
+      "options": {
+        "none": "Zelfde als Home Assistant server taal",
+        "fr": "Frans",
+        "nl": "Nederlands",
+        "de": "Duits",
+        "en": "Engels"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opties",
+        "data": {
+          "style": "Radarstijl",
+          "dark_mode": "Radar in donkere modus",
+          "use_deprecated_forecast_attribute": "Gebruik het forecat attribuut (afgeschaft)",
+          "language_override": "Taal"
+        }
+      }
+    }
+  },
+  "issues": {
+    "zone_moved": {
+      "title": "{zone} ligt buiten de Benelux",
+      "fix_flow": {
+        "step": {
+          "confirm": {
+            "title": "Reparatie: {zone} ligt buiten de Benelux",
+            "description": "Deze integratie levert alleen gegevens op voor de Benelux. Verplaats de zone of verwijder de configuratie."
+          }
+        },
+        "error": {
+          "out_of_benelux": "{zone} ligt buiten de Benelux. Kies een zone in de Benelux.",
+          "api_error": "Kon geen gegevens van de API krijgen",
+          "zone_not_exist": "{zone} bestaat niet",
+          "invalid_choice": "Ongeldige keuze"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "next_warning": {
+        "name": "Volgende waarschuwing"
+      },
+      "next_sunrise": {
+        "name": "Volgende zonsopkomst"
+      },
+      "next_sunset": {
+        "name": "Volgende zonsondergang"
+      },
+      "pollen_alder": {
+        "name": "Elzenpollen",
+        "state": {
+          "active": "Actief",
+          "green": "Groen",
+          "yellow": "Geel",
+          "orange": "Oranje",
+          "red": "Rood",
+          "purple": "Paars",
+          "none": "Geen"
+        }
+      },
+      "pollen_ash": {
+        "name": "Essen pollen",
+        "state": {
+          "active": "Actief",
+          "green": "Groen",
+          "yellow": "Geel",
+          "orange": "Oranje",
+          "red": "Rood",
+          "purple": "Paars",
+          "none": "Geen"
+        }
+      },
+      "pollen_birch": {
+        "name": "Berken pollen",
+        "state": {
+          "active": "Actief",
+          "green": "Groen",
+          "yellow": "Geel",
+          "orange": "Oranje",
+          "red": "Rood",
+          "purple": "Paars",
+          "none": "Geen"
+        }
+      },
+      "pollen_grasses": {
+        "name": "Graspollen",
+        "state": {
+          "active": "Actief",
+          "green": "Groen",
+          "yellow": "Geel",
+          "orange": "Oranje",
+          "red": "Rood",
+          "purple": "Paars",
+          "none": "Geen"
+        }
+      },
+      "pollen_hazel": {
+        "name": "Hazelaar pollen",
+        "state": {
+          "active": "Actief",
+          "green": "Groen",
+          "yellow": "Geel",
+          "orange": "Oranje",
+          "red": "Rood",
+          "purple": "Paars",
+          "none": "Geen"
+        }
+      },
+      "pollen_mugwort": {
+        "name": "Alsem pollen",
+        "state": {
+          "active": "Actief",
+          "green": "Groen",
+          "yellow": "Geel",
+          "orange": "Oranje",
+          "red": "Rood",
+          "purple": "Paars",
+          "none": "Geen"
+        }
+      },
+      "pollen_oak": {
+        "name": "Eiken pollen",
+        "state": {
+          "active": "Actief",
+          "green": "Groen",
+          "yellow": "Geel",
+          "orange": "Oranje",
+          "red": "Rood",
+          "purple": "Paars",
+          "none": "Geen"
+        }
+      }
+    }
+  },
+  "services": {
+    "get_forecasts_radar": {
+      "name": "Get forecast from the  radar",
+      "description": "Weersverwachting van radar ophalen. Alleen neerslag is beschikbaar.",
+      "fields": {
+        "include_past_forecasts": {
+          "name": "Verleden weersvoorspellingen opnemen",
+          "description": "Geeft ook weersvoorspellingen uit het verleden."
+        }
+      }
+    }
+  }
+}
