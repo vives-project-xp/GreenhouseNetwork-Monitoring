@@ -63,7 +63,7 @@ class ContentCardExample extends HTMLElement {
       });
 
       // Delay animation to ensure canvases are available in the DOM
-      setTimeout(() => {
+      setInterval(() => {
         this.sensors.forEach((element) => {
           element["canvas"].theme = this.theme;
           element["canvas"].value = element["sensor_value"];
@@ -71,10 +71,12 @@ class ContentCardExample extends HTMLElement {
       }, 100);
     }
   }
+  
   setConfig(config) {
     if (!config.entity) throw new Error("You need to define an entity");
     this.config = config;
   }
+
   getCardSize() {
     return 1;
   }
