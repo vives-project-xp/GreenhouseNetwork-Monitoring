@@ -1,20 +1,39 @@
 import logging
 from datetime import timedelta
-from homeassistant.helpers import config_validation as cv
 from homeassistant.const import EVENT_HOMEASSISTANT_STOP
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 from homeassistant.components.webhook import async_register, async_unregister
-
 from .const import DOMAIN, DEFAULT_POLL_INTERVAL
 from .ping import ping_device
 from aiohttp import web
+import aiohttp
+import json
+import random
 
 _LOGGER = logging.getLogger(__name__)
-
+async def foo(hass):
+    # data = hass.states.sensor.greenhouse_10_10_2_48 
+    # temperature = data.attributes["temperature"]
+    # BrightnessRecieve = data.attributes["brightness"]
+    BrightnessSend = 0
+    sensor = random.randint(0, 100)
+    
+    if sensor < 50:  BrightnessSend = 3
+    else: BrightnessSend = 254
+    
+    # try:
+    #     _LOGGER.warning(f"hass data: {hass.data[DOMAIN]}")
+    # except Exception as e:
+    #     _LOGGER.error(f"Error: {e}")    
+    async with aiohttp.ClientSession() as session:
+        async with session.post("http://10.10.2.2/json/state", headers={'Content-Type':'application/json'}, data=json.dumps({"bri": BrightnessSend})) as response:
+            response_text = await response.text()
+    
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up Greenhouse from a config entry."""
+    _LOGGER.info(f"Setting up Greenhouse device with IP address: {entry.data['ip_address']}")
     coordinator = GreenhouseCoordinator(hass, entry.data)
     ip_address = entry.data["ip_address"]
     webhook_id = f"greenhouse_{ip_address.replace('.', '_')}"
@@ -28,25 +47,27 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # Start the coordinator (start polling)
     await coordinator.async_config_entry_first_refresh()
 
+
     # Register the sensor platform
-    await  hass.config_entries.async_forward_entry_setup(entry, "sensor")
+    await  hass.config_entries.async_forward_entry_setups(entry, ["sensor"])
 
     async def handle_webhook(hass, webhook_id, request):
         """Handle incoming webhook data."""
         try:
+            try:
+                await foo(hass)
+            except Exception as e:
+                _LOGGER.info(f"Error: {e}")
             data = await request.json()
-            _LOGGER.info(f"Received webhook data: {data} from {webhook_id}")
-            sensor_value = 0
-            sensor_type = None
-            sensor_unit = ""
+            card_name = ""
+            sensors = []
 
-            if "sensor_value" in data:
-                sensor_value = data["sensor_value"]
-                _LOGGER.info(f"Sensor value received: {sensor_value}")
-            if "type" in data:
-                sensor_type = data["type"]
-            if "unit" in data:
-                sensor_unit = data["unit"]
+            if "card-name" in data:
+                card_name = data["card-name"]
+                _LOGGER.info(f"card name received: {card_name}")
+            if "sensors" in data:
+                sensors = data["sensors"]
+                _LOGGER.info(f"sensors received: {sensors}")
 
             # Find the correct coordinator using the webhook_id
             for entry_data in hass.data[DOMAIN].values():
@@ -57,9 +78,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                 _LOGGER.error(f"No coordinator found for webhook_id: {webhook_id}")
                 return web.Response(status=404)
 
-            coordinator.data["sensor_value"] = sensor_value  # Update sensor_value in data
-            coordinator.data["sensor_type"] = sensor_type
-            coordinator.data["sensor_unit"] = sensor_unit
+            coordinator.data["card-name"] = card_name  # Update sensor_value in data
+            coordinator.data["sensors"] = sensors
             await coordinator.async_request_refresh()  # Force entity update
             return web.Response(text="Data is sended succesfully", status=200)
 
@@ -74,14 +94,15 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     async def on_hass_stop(event):
         """Cleanup when Home Assistant is stopping."""
         _LOGGER.info(f"Home Assistant is stopping, deregistering webhook for {ip_address}.")
-        async_unregister(webhook_id)
+        await async_unregister(hass, webhook_id)
+    # Schedule foo to run periodically
+    
 
     hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, on_hass_stop)
 
     _LOGGER.info(f"Webhook registered for Greenhouse device at {ip_address}. Webhook ID: {webhook_id}")
 
     return True
-
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Unload a config entry."""
@@ -94,7 +115,6 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     await hass.config_entries.async_forward_entry_unload(entry, "sensor")
     return True
-
 
 class GreenhouseCoordinator(DataUpdateCoordinator):
     """Class to manage fetching data from the Greenhouse device."""
@@ -109,15 +129,11 @@ class GreenhouseCoordinator(DataUpdateCoordinator):
             name=f"Greenhouse device {self.device_name}",
             update_interval=timedelta(seconds=DEFAULT_POLL_INTERVAL),
         )
-        
-        
-        
         # Zorg ervoor dat data correct wordt geïnitialiseerd
         self.data = {
             "connected": False,  # Begin met de connectiviteitstatus
-            "sensor_value": 0,  # Begin met een lege sensorwaarde
-            "sensor_type": None,
-            "sensor_unit": ""
+            "card-name": "",
+            "sensors": []
         }
 
     async def _async_update_data(self):
@@ -128,3 +144,5 @@ class GreenhouseCoordinator(DataUpdateCoordinator):
             return self.data  # Zorg ervoor dat je de data retourneert
         except Exception as err:
             raise UpdateFailed(f"Failed to ping device: {self.data}")
+
+
