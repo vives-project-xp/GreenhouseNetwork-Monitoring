@@ -13,7 +13,8 @@ enum class SensorType {
     EC,
     PRESSURE,
     AIRFLOW,
-    UV
+    UV,
+    WATERLEVEL
 };
 
 
@@ -24,14 +25,17 @@ private:
     SensorType type;
     String unit;
     float value;
+    int min;
+    int max;
     String typeToString(SensorType type);
 
 
 public:
     HaSensor();
-    HaSensor(String name, SensorType type);
+    HaSensor(String name, SensorType type, int min, int max);
     void setValue(float value);
         String toJson();
+        int getValue();
 };
 
 
