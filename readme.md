@@ -61,8 +61,6 @@ The project is divided into 2 parts:
 | USW-Flex (46W)    | 1        | [€90](https://eu.store.ui.com/eu/en/category/all-switching/products/usw-flex) | No                         |
 | **Total Price**                | -        | **€135**
 
-                                                                                   |
-
 ### The network
 
 The network will be deployed in the serre. It will consist of one access point (AP) in the middle, connecting sensors to a monitoring dashboard via WiFi. A switch will connect the network to the Devbit using Ethernet to assign DHCP addresses to the sensors.
