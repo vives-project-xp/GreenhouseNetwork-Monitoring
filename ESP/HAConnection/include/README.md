@@ -16,6 +16,8 @@ Installeer deze bibliotheken om verbinding te kunnen maken met de home assistant
 >  HTTPClient  
 >  WiFi
 
+Kopieer de .h bestanden naar je iclude folder, en de .cpp bestanden naar je src folder.
+
 ## Verbinding maken met Home Assistant
 
 Er zijn 3 verschillende manieren om verbinding te maken met HomeAssistant:
@@ -100,10 +102,10 @@ void loop(){}
 ## Sensor toevoegen
 
 Om een sensor toe te voegen aan de home assistant voeg je een nieuwe instantie toe van HASensor.
-Bij het aanmaken van de sensor geef je de naam mee die zichtbaar wordt in de home assistant. De 2de paramter is het type sensor.
+Bij het aanmaken van de sensor geef je de naam mee die zichtbaar wordt in de home assistant. De 2de paramter is het type sensor. Daarneest geef je nog minimum en maximum waarde door.
 De verschillende mogelijkheden zijn:
 
-> TEMPERATURE, HUMIDITY, LIGHT, CO2, SOIL_MOISTURE, PH, EC, PRESSURE, AIRFLOW, UV
+> TEMPERATURE, HUMIDITY, LIGHT, CO2, SOIL_MOISTURE, PH, EC, PRESSURE, AIRFLOW, UV, WATERLEVEL, BATTERYLEVEL
 
 ```c++
 #include <Arduino.h>
@@ -123,7 +125,7 @@ void setup() {
   if (!connection.connected)
     return;
 
-  sensor = HaSensor("Temperature", SensorType::TEMPERATURE);
+  sensor = HaSensor("Temperature", SensorType::TEMPERATURE, -20, 30);
 
 }
 
@@ -165,10 +167,10 @@ void setup() {
  if (!connection.connected)
    return;
 
- tempSensor = HaSensor("Temperature", SensorType::TEMPERATURE);
+ tempSensor = HaSensor("Temperature", SensorType::TEMPERATURE, , -20, 30);
  tempSensor.setValue(20.5);
 
- humSensor = HaSensor("Humidity", SensorType::HUMIDITY);
+ humSensor = HaSensor("Humidity", SensorType::HUMIDITY, , 0, 100);
  humSensor.setValue(50.5);
 
  connection.sendData("Temperature Card", {tempSensor, humSensor});
@@ -198,7 +200,7 @@ void setup() {
   if (!connection.connected)
     return;
 
-  sensor = HaSensor("Temperature", SensorType::TEMPERATURE);
+  sensor = HaSensor("Temperature", SensorType::TEMPERATURE, -20, 30);
   sensor.setValue(20.5);
   connection.sendData("Temperature Card", {sensor});
 }

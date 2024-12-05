@@ -20,7 +20,7 @@ private:
     HaSensor sensor;
     void sendHttpPost(String json);
     String stringIP();
-    String version = "v0.3";
+    String version = "v0.4";
     void checkVersion();
 
 public:
