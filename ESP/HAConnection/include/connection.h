@@ -13,17 +13,22 @@ private:
     String password;
     String device_name;
     WiFiServer server;
+    String HAIp;
+    int HAPort;
     int port;
     bool output;
     HaSensor sensor;
     void sendHttpPost(String json);
     String stringIP();
+    String version = "v0.4";
+    void checkVersion();
 
 public:
     bool connected;
     HaConnection();
     HaConnection(String ssid, String password);
-    HaConnection(String ssid, String password, int port, bool output);
+    HaConnection(String ssid, String password, String HAIp, int HAPort);
+    HaConnection(String ssid, String password, String HAIp, int HAPort, int port, bool output);
 
     void AttemptWifiConnection();
     void StartMDNS();

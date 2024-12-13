@@ -1,0 +1,42 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+  extra_module_url:
+    - /hacsfiles/kiosk-mode/kiosk-mode.js?v1.0.0
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+sun:
+
+
+lovelace:
+  mode: yaml
+  resources:
+    - url: /local/gauges/dynamic-cards.js
+      type: module
+    - url: /local/custom-lovelace/weather-card/weather-card.js
+      type: module
+    # - url: /local/cummunity/lovelace-auto-reload-card/auto-reload-card.js
+    #   type: module
+
+# Example configuration.yaml entry for Google Mail.
+notify:
+  - name: "Gmail"
+    platform: smtp
+    server: "smtp.gmail.com"
+    port: 587
+    timeout: 15
+    sender: "greenhousenetworkingmonitoring@gmail.com"
+    encryption: starttls
+    username: "greenhousenetworkingmonitoring@gmail.com"
+    password: "Project2024"
+    recipient:
+      - "xander.claessens@student.vives.be"
+      - "aitor.vannevel@student.vives.be"
+    sender_name: "Greenhouse"

@@ -2,25 +2,23 @@
 #include <vector>
 #include <ArduinoJson.h>
 
-HaConnection::HaConnection(): HaConnection("undefined", "undefined", 80, false) {};
-HaConnection::HaConnection(String ssid, String password): HaConnection(ssid, password, 80, false) {};
-HaConnection::HaConnection(String ssid, String password, int port, bool output): ssid(ssid), password(password), server(WiFiServer(port)), port(port), output(output){};
+HaConnection::HaConnection() {};
+HaConnection::HaConnection(String ssid, String password): HaConnection(ssid, password, "homeassistant.local", 8123, 80, false) {};
+HaConnection::HaConnection(String ssid, String password, String HAIp, int HAPort): HaConnection(ssid, password, HAIp, HAPort, 80, false) {};
+HaConnection::HaConnection(String ssid, String password, String HAIp, int HAPort, int port, bool output): ssid(ssid), password(password), server(WiFiServer(port)), HAIp(HAIp), HAPort(HAPort), port(port), output(output){this->setup();};
 
 void HaConnection::StartMDNS()
 {
     device_name = "greenhouse" + stringIP();
-    if (!MDNS.begin(device_name.c_str()))
-    {
-        while (1)
-        {
-            delay(1000);
-            if (MDNS.begin(device_name.c_str()))
-                break;
-        }
+    if(output) Serial.print("starting MDNS");
+    do{
+        if (output) Serial.print(".");
+        delay(250);
     }
+    while (!MDNS.begin(device_name.c_str())) ;
     if (output)
     {
-        Serial.print("MDNS gestart op ");
+        Serial.print("\nMDNS gestart op ");
         Serial.print(device_name);
         Serial.print(".local\n");
     }
@@ -30,17 +28,13 @@ void HaConnection::StartMDNS()
 void HaConnection::AttemptWifiConnection()
 {
     WiFi.begin(ssid.c_str(), password.c_str());
-    if (output)
-        Serial.print("Verbinden met WiFi... ");
+    if (output) Serial.print("Verbinden met WiFi... ");
     do
     {
-        delay(500);
-        if (output)
-            Serial.print(".");
+        if (output) Serial.println(".");
+        delay(250);
     } while (WiFi.status() != WL_CONNECTED);
-    Serial.print(WiFi.localIP());
-    if (output)
-        Serial.print("\n");
+    Serial.println(WiFi.localIP());
 };
 
 void HaConnection::setup()
@@ -48,6 +42,7 @@ void HaConnection::setup()
     this->AttemptWifiConnection();
     this->StartMDNS();
     this->connected = true;
+    this->checkVersion();
 };
 
 void HaConnection::sendData(String card_name, const std::vector<HaSensor>& sensors) {
@@ -61,9 +56,11 @@ void HaConnection::sendData(String card_name, const std::vector<HaSensor>& senso
     }
     json = json.substring(0, json.length() - 1);
     json += "]}";
-    Serial.println("Sending data: ");
-    Serial.println(json);
-    Serial.println();
+    if(output){
+        Serial.println("Sending data: ");
+        Serial.println(json);
+        Serial.println();
+    }
 
     sendHttpPost(json);
 }
@@ -71,23 +68,22 @@ void HaConnection::sendData(String card_name, const std::vector<HaSensor>& senso
 void HaConnection::sendHttpPost(String json) {
     if (WiFi.status() == WL_CONNECTED) {
         HTTPClient http;
-        String url = "http://10.10.2.20:8123/api/webhook/greenhouse" + stringIP();
-        Serial.println(url);
+        String url = "http://" + HAIp + ":" + HAPort + "/api/webhook/greenhouse" + stringIP();
+        if(output) Serial.println(url);
         http.begin(url);
         http.addHeader("Content-Type", "application/json");
-
         int httpResponseCode = http.POST(json);
-
-        if (httpResponseCode > 0) {
-            String response = http.getString();
-            Serial.println("Response: " + response);
-        } else {
-            Serial.println("Error in sending POST: " + String(httpResponseCode));
+        if(output){
+            if (httpResponseCode > 0) {
+                String response = http.getString();
+                Serial.println("Response: " + response);
+            } else Serial.println("Error in sending POST: " + String(httpResponseCode));
         }
-
+        
         http.end();
     } else {
-        Serial.println("WiFi not connected");
+        if(output) Serial.println("WiFi not connected");
+        AttemptWifiConnection();
     }
 }
 
@@ -97,8 +93,25 @@ String HaConnection::stringIP() {
     // Verkrijg het lokale IP-adres als een string
     String ip = WiFi.localIP().toString();
 
-    // Vervang alle punten door underscores
     ip.replace('.', '_');
 
     return "_" + ip;  // Voeg aan het begin een underscore toe
+}
+
+void HaConnection::checkVersion() {
+    if (WiFi.status() == WL_CONNECTED) {
+        HTTPClient http;
+        String url = "https://api.github.com/repos/vives-project-xp/GreenhouseNetwork-Monitoring/releases/latest";
+        http.begin(url);
+        int httpResponseCode = http.GET();
+        if (httpResponseCode > 0) {
+            String response = http.getString();
+            JsonDocument doc;
+            deserializeJson(doc, response);
+            String latestVersion = doc["tag_name"];
+            if (latestVersion != version) {
+                Serial.println("New version available: " + latestVersion + " -> https://github.com/vives-project-xp/GreenhouseNetwork-Monitoring/releases");
+            }
+        }
+    }
 }

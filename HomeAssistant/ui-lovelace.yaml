@@ -1,0 +1,53 @@
+kiosk_mode:
+  user_settings:
+    - users:
+        - "dashboard"
+      hide_sidebar: true
+      kiosk: 1
+
+views:
+  - title: Home
+    path: home
+    type: custom:custom-view
+    badges: []
+    cards:
+      # - type: picture-entity
+      #   entity: camera.radar_thuis
+      #   camera_view: live
+      # - type: custom:weather-card 
+      #   entity: weather.buienradar
+      #   name: Buienradar
+      #   forecast_type: daily
+      # - type: weather-forecast
+      #   entity: weather.buienradar
+      #   show_current: true
+      #   forecast_type: daily
+      #   secondary_info_attribute:
+
+      # - type: picture-entity
+      #   entity: camera.buienradar
+      #   image: https://demo.home-assistant.io/stub_config/bedroom.png
+      #   show_state: false
+      #   show_name: false
+      #   camera_view: auto
+      
+      
+        # - camera_view: live
+        #   type: picture-glance
+        #   entities:
+        #     - entity: binary_sensor.m5525_e_0_vmd3_0
+        #     - entity: binary_sensor.m5525_e_0_sound_1
+        #   camera_image: camera.m5525_e_0
+        #   entity: camera.m5525_e_0
+
+
+
+        # - camera_view: live
+        #   type: picture-glance
+        #   entities:
+        #     - entity: binary_sensor.p1435_le_0_daynight_1
+        #   camera_image: camera.p1435_le_0
+
+          
+# type: custom:auto-reload-card
+# delay_in_minute: 1
